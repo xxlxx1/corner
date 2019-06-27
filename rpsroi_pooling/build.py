@@ -1,6 +1,7 @@
 import os
 import torch
-from torch.utils.ffi import create_extension
+# from torch.utils.ffi import create_extension
+from torch.utils.cpp_extension import BuildExtension
 
 sources = []
 headers = []
@@ -19,7 +20,7 @@ print(this_file)
 extra_objects = ['src/cuda/rpsroi_pooling.cu.o']
 extra_objects = [os.path.join(this_file, fname) for fname in extra_objects]
 
-ffi = create_extension(
+ffi = BuildExtension(
     '_ext.rpsroi_pooling',
     headers=headers,
     sources=sources,
