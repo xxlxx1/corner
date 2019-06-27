@@ -266,6 +266,7 @@ def main():
     # parser.add_argument('--ic_root', default='/home/lvpengyuan/research/text/',type=str,  help='Location of data root directory')
     parser.add_argument('--td_root', default='/home/lpy/Datasets/TD&&TR/',type=str,  help='Location of data root directory')
     parser.add_argument('--coco_root', default='/home/lpy/Datasets/coco-text/', type=str, help='Location of data root direction')
+    parser.add_argument('--mlt_root', default='/home/lpy/Datasets/coco-text/', type=str, help='Location of data root direction')
     args = parser.parse_args()
     cuda = torch.cuda.is_available()
     ## setup logger
@@ -303,6 +304,10 @@ def main():
                                   shuffle=False, pin_memory=True)
     elif args.dataset == 'coco':
         dataset = COCODetection(args.coco_root, 'test', dim=cfg['min_dim'])
+        data_loader = data.DataLoader(dataset, args.test_batch_size, num_workers=args.num_workers,
+                                  shuffle=False, pin_memory=True)
+    elif args.dataset == 'mlt':
+        dataset = COCODetection(args.mlt_root, 'test', dim=cfg['min_dim'])
         data_loader = data.DataLoader(dataset, args.test_batch_size, num_workers=args.num_workers,
                                   shuffle=False, pin_memory=True)
     else:

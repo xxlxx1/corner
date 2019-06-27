@@ -40,8 +40,8 @@ class MLTDetection(data.Dataset):
             self.image_paths = image_paths
             self.targets = get_boxes(gt_paths)
         else:
-            all_items  = os.listdir(self.root + '/test/')
-            image_paths = [self.root + '/test/' + x for x in all_items]
+            all_items  = os.listdir(self.root )
+            image_paths = [self.root + x for x in all_items]
             self.image_paths = image_paths
             self.targets = []
 
